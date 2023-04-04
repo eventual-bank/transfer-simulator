@@ -5,7 +5,8 @@ const NUMBER_OF_ACCOUNTS = 10
 const MAX_TRANSFER = 100
 
 function getRandom () {
-  return Math.random();
+  // account numbers start at 1
+  return Math.random()+1;
 }
 
 function pickValue (ceiling) {
@@ -27,38 +28,35 @@ function buildTransfer() {
   return transfer
 }
 
-
 export const handler = async (event) => {
-  let response;
 
-  const message =  buildTransfer()
 
-  const params = {
-    DelaySeconds: 10,
-    MessageBody: JSON.stringify(message),
-    QueueUrl: "https://sqs.us-east-1.amazonaws.com/709238829564/transfer"
-  };
+  const transfers = process.env.NUMBER_OF_TRANSFERS;
 
+  console.log ("Number of transfers: ", transfers);
 
   try {
+    for (let i = 0; i < transfers; i++) {
+    const message =  buildTransfer();
+
+    const params = {
+      DelaySeconds: 10,
+      MessageBody: JSON.stringify(message),
+      QueueUrl: "https://sqs.us-east-1.amazonaws.com/709238829564/account_transfer"
+    };
+
     const data = await sqsClient.send(new SendMessageCommand(params));
-    if (data) {
-      console.log("Success, message sent. MessageID:", data.MessageId);
-      const bodyMessage = 'Message Send to SQS- Here is MessageId: ' + data.MessageId;
-      response = {
-        statusCode: 200,
-        body: JSON.stringify(bodyMessage),
-      };
-    } else {
-      response = {
-        statusCode: 500,
-        body: JSON.stringify('Some error occured !!')
-      };
-    }
-    return response;
+    console.log("Success, messages sent. MessageID:", data.MessageId);
+  }
   }
   catch (err) {
     console.log("Error", err);
   }
 
+  const bodyMessage = 'Messages sent to SQS';
+  const response = {
+    statusCode: 200,
+    body: JSON.stringify(bodyMessage),
+  };
+  return response;
 };

@@ -16,13 +16,16 @@ Resources:
       Runtime: nodejs18.x
       Policies:
         - SQSSendMessagePolicy:
-            QueueName: transfer
+            QueueName: account_transfer
       Events:
         CreateOrUpdateItem:
           Type: HttpApi
           Properties:
             Path: /transfer
             Method: GET
+      Environment:
+        Variables:
+          NUMBER_OF_TRANSFERS: 60 
 
 Outputs:
   ApiEndpoint:
