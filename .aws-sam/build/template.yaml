@@ -23,7 +23,7 @@ Resources:
             ScheduleExpression: rate(1 minute)
       Environment:
         Variables:
-          NUMBER_OF_TRANSFERS: 600
+          NUMBER_OF_TRANSFERS: 60
     Metadata:
       SamResourceId: TransferSimulatorFunction
 Outputs:
