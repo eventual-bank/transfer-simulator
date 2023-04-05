@@ -17,21 +17,16 @@ Resources:
       - SQSSendMessagePolicy:
           QueueName: account_transfer
       Events:
-        CreateOrUpdateItem:
-          Type: HttpApi
+        ScheduleEvent:
+          Type: ScheduleV2
           Properties:
-            Path: /transfer
-            Method: GET
+            ScheduleExpression: rate(1 minute)
       Environment:
         Variables:
-          NUMBER_OF_TRANSFERS: 60
+          NUMBER_OF_TRANSFERS: 600
     Metadata:
       SamResourceId: TransferSimulatorFunction
 Outputs:
-  ApiEndpoint:
-    Description: The invoke URL for the HTTP API, using GET
-    Value:
-      Fn::Sub: https://${ServerlessHttpApi}.execute-api.${AWS::Region}.amazonaws.com/validate
   Function:
     Description: Transfer simulator function ARN
     Value:

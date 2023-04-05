@@ -5,12 +5,12 @@ const NUMBER_OF_ACCOUNTS = 10
 const MAX_TRANSFER = 100
 
 function getRandom () {
-  // account numbers start at 1
-  return Math.random()+1;
+  return Math.random();
 }
 
 function pickValue (ceiling) {
-  const r = Math.round(getRandom() * ceiling);
+  // account numbers start at 1
+  const r = Math.ceil(getRandom() * ceiling);
   return r;
 }
 
