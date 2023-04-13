@@ -1,5 +1,5 @@
 import { SQSClient, SendMessageCommand } from "@aws-sdk/client-sqs";
-const sqsClient = new SQSClient({ region: "us-east-1" });
+const sqsClient = new SQSClient();
 
 const NUMBER_OF_ACCOUNTS = 10
 const MAX_TRANSFER = 100
@@ -32,8 +32,10 @@ export const handler = async (event) => {
 
 
   const transfers = process.env.NUMBER_OF_TRANSFERS;
+  const queueUrl = process.env.QUEUE_URL;
 
   console.log ("Number of transfers: ", transfers);
+  console.log ("Queue URL: ", queueUrl);
 
   try {
     for (let i = 0; i < transfers; i++) {
@@ -42,7 +44,7 @@ export const handler = async (event) => {
     const params = {
       DelaySeconds: 10,
       MessageBody: JSON.stringify(message),
-      QueueUrl: "https://sqs.us-east-1.amazonaws.com/709238829564/account_transfer"
+      QueueUrl: queueUrl
     };
 
     const data = await sqsClient.send(new SendMessageCommand(params));

@@ -24,6 +24,7 @@ Resources:
       Environment:
         Variables:
           NUMBER_OF_TRANSFERS: 600
+          QUEUE_URL: https://sqs.us-east-1.amazonaws.com/709238829564/account_transfer
     Metadata:
       SamResourceId: TransferSimulatorFunction
 Outputs:

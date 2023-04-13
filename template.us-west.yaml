@@ -27,7 +27,7 @@ Resources:
         Variables:
           # 10 tps
           NUMBER_OF_TRANSFERS: 600
-          QUEUE_URL: "https://sqs.us-east-1.amazonaws.com/709238829564/account_transfer"
+          QUEUE_URL: "https://sqs.us-west-1.amazonaws.com/709238829564/account_transfer"
 
 
 Outputs:
