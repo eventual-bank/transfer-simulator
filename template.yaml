@@ -25,7 +25,8 @@ Resources:
 
       Environment:
         Variables:
-          NUMBER_OF_TRANSFERS: 120
+          # 10 tps
+          NUMBER_OF_TRANSFERS: 600
 
 Outputs:
   Function:

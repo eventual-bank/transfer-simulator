@@ -46,7 +46,6 @@ export const handler = async (event) => {
     };
 
     const data = await sqsClient.send(new SendMessageCommand(params));
-    console.log("Success, messages sent. MessageID:", data.MessageId);
   }
   }
   catch (err) {
