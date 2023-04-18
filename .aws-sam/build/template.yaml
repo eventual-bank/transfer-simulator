@@ -23,7 +23,7 @@ Resources:
             ScheduleExpression: rate(1 minute)
       Environment:
         Variables:
-          NUMBER_OF_TRANSFERS: 600
+          NUMBER_OF_TRANSFERS: 6000
           QUEUE_URL:
             Fn::Sub: https://sqs.${AWS::Region}.amazonaws.com/${AWS::AccountId}/account_transfer
     Metadata:
