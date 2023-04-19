@@ -24,8 +24,8 @@ Resources:
             ScheduleExpression: "rate(1 minute)" 
       Environment:
         Variables:
-          # 100 tps
-          NUMBER_OF_TRANSFERS: 6000
+          # 1 tps
+          NUMBER_OF_TRANSFERS: 60
           QUEUE_URL: !Sub "https://sqs.${AWS::Region}.amazonaws.com/${AWS::AccountId}/account_transfer"
 
 Outputs:
